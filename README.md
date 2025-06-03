@@ -843,7 +843,7 @@ If devices are still not using Pi-hole, you might need to:
 2. Wait longer for DHCP leases to expire
 3. Check if your router has any DNS override settings that need changing
 
-User 1: C:\Users\cmuppala>ipconfig  | findstr "DNS"
+User 1: C:\Users\user1>ipconfig  | findstr "DNS"
    Connection-specific DNS Suffix  . :
    Connection-specific DNS Suffix  . :
    Connection-specific DNS Suffix  . :
