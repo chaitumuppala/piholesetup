@@ -1,4 +1,4 @@
-cmuppala4746: Err:2 http://deb.debian.org/debian-security bookworm-security InRelease
+User 1: Err:2 http://deb.debian.org/debian-security bookworm-security InRelease
   Could not resolve 'portalv6test.actcorp.in?mac=bc:07:1d:42:a3'
 Err:3 http://deb.debian.org/debian bookworm-updates InRelease
   Could not resolve 'portalv6test.actcorp.in?mac=bc:07:1d:42:a3'
@@ -62,7 +62,7 @@ The error shows that your Raspberry Pi is trying to connect to package repositor
 
 If the issue persists, you might need to contact your network administrator at ACT Fibernet for assistance with their captive portal system.
 
-cmuppala4746: I am able to visit websites without asking for username or password 
+User 1: I am able to visit websites without asking for username or password 
 
 So should I DNS servers 
 
@@ -115,7 +115,7 @@ If you're able to browse websites without authentication but still having the re
 
 If that doesn't work, the issue might be with your ISP's network configuration specifically blocking apt repositories or applying different routing rules to them.
 
-cmuppala4746: 
+User 1: 
 Failed to restart networking.service: Unit networking.service not found.
 
 
@@ -149,7 +149,7 @@ The error `Unit networking.service not found` indicates that your Raspberry Pi d
 
 After restarting your network service with one of these methods, try running `sudo apt update` again to see if your DNS changes have resolved the issue with package repositories.
 
-cmuppala4746: sudo systemctl restart NetworkManager
+User 1: sudo systemctl restart NetworkManager
 
 This worked 
 
@@ -198,7 +198,7 @@ Good to hear that restarting NetworkManager worked. Since you're still experienc
 
 If these steps don't resolve the issue, there might be additional network filtering happening at the ISP level that requires further troubleshooting.
 
-cmuppala4746: sudo apt update -o Acquire::ForceIPv4=true
+User 1: sudo apt update -o Acquire::ForceIPv4=true
 
 This worked.. Should I use this apt upgrade as well
 
@@ -225,7 +225,7 @@ Acquire::ForceIPv4 "true";
 
 Save and exit (Ctrl+O, Enter, Ctrl+X) and all future apt commands will use IPv4 by default.
 
-cmuppala4746: Perfect. This worked. Help me install pi-hole on my raspberry pi zero 2
+User 1: Perfect. This worked. Help me install pi-hole on my raspberry pi zero 2
 
 GitHub Copilot: # Installing Pi-hole on Raspberry Pi Zero 2
 
@@ -332,7 +332,7 @@ pihole -g
 
 Let me know if you run into any issues during installation!
 
-cmuppala4746: How do I setup static address now. This is test setup for now. Should I also do that or should I go with the exusting connection. I won't restart till my testing is done 
+User 1: How do I setup static address now. This is test setup for now. Should I also do that or should I go with the exusting connection. I won't restart till my testing is done 
 
 GitHub Copilot: # Setting Up a Static IP Address for Pi-hole
 
@@ -371,7 +371,7 @@ These changes will take effect after a network restart or system reboot. Since y
 
 Set up the static IP configuration now, but continue using your current IP for testing. When you're ready to fully implement Pi-hole, restart networking to apply the static IP configuration.
 
-cmuppala4746: How do I find my router ip address
+User 1: How do I find my router ip address
 
 GitHub Copilot: # Finding Your Router IP Address on Windows
 
@@ -404,7 +404,7 @@ Your router's IP address (often called the default gateway) can be found using s
 
 Once you have the IP address, you can access your router's admin page by typing this address into your web browser.
 
-cmuppala4746: Y
+User 1: Y
 
 GitHub Copilot: # Finding Your Router IP Address on Raspberry Pi
 
@@ -452,7 +452,7 @@ This shows your network configuration including your IP address. Your router is 
 
 After finding your router's IP address, you'll need it for configuring Pi-hole's static IP in the dhcpcd.conf file.
 
-cmuppala4746: SSID:	AC
+User 1: SSID:	AC
 Protocol:	Wi-Fi 5 (802.11ac)
 Security type:	WPA2-Personal
 Manufacturer:	Intel Corporation
@@ -493,7 +493,7 @@ These DNS servers are from ACT Fibernet, which explains the earlier DNS resoluti
 
 Your IPv4 forcing approach (`-o Acquire::ForceIPv4=true`) was the correct solution since it bypasses potential issues with ACT's IPv6 DNS configuration.
 
-cmuppala4746: also there is no dhcpcd service in my raspbian. It is networkmanager that worker. However, when i restarted previously it reset to the act dns values.. 
+User 1: also there is no dhcpcd service in my raspbian. It is networkmanager that worker. However, when i restarted previously it reset to the act dns values.. 
 
 Taking all this into consideration how to I proceed with static ip setup for my pihole in raspberry pi zero
 
@@ -582,7 +582,7 @@ This script will run whenever your connection is brought up, ensuring your DNS s
 
 Now your Pi-hole should maintain a consistent IP address and DNS settings even after reboots, making it reliable as a DNS server for your network.
 
-cmuppala4746: It is Wired connection 1
+User 1: It is Wired connection 1
 and let's use 192.168.68.120 as static ip
 
 Now give me the exact commands to run 
@@ -653,7 +653,7 @@ sudo chmod +x /etc/NetworkManager/dispatcher.d/99-dns-settings
 
 These commands will configure your Raspberry Pi with a static IP of 192.168.68.120, which will be used for your Pi-hole installation.
 
-cmuppala4746: Perfectly. Done. 
+User 1: Perfectly. Done. 
 
 Let's now move forward. What should I do
 
@@ -697,7 +697,7 @@ curl -sSL --ipv4 https://install.pi-hole.net | bash
 
 Would you like help with any specific part of the installation process?
 
-cmuppala4746: Is primary dns enough to setup on router.. 
+User 1: Is primary dns enough to setup on router.. 
 
 GitHub Copilot: # DNS Configuration for Pi-hole
 
@@ -734,7 +734,7 @@ If reliability is a concern, consider:
 
 This ensures all DNS traffic goes through Pi-hole while maintaining redundancy at the upstream level.
 
-cmuppala4746: When I changed the primanry, i got the following error
+User 1: When I changed the primanry, i got the following error
 
 This ip conflicts with the lan subnet. . To use this dns server, set it at DHCP Server
 
@@ -764,7 +764,7 @@ This is a security/configuration restriction. Many routers won't allow setting a
 
 After setting this up correctly, devices on your network will receive the Pi-hole IP as their DNS server when they request an IP address via DHCP, ensuring all DNS queries are processed through Pi-hole.
 
-cmuppala4746: I have updated the dns server in DHCP and rebooted my router. Do I need to manually set this dns at the respective devices because i am still seeing different man dns setting of  router. How do i validate the working of pi hole
+User 1: I have updated the dns server in DHCP and rebooted my router. Do I need to manually set this dns at the respective devices because i am still seeing different man dns setting of  router. How do i validate the working of pi hole
 
 GitHub Copilot: # Validating Your Pi-hole Setup
 
@@ -843,7 +843,7 @@ If devices are still not using Pi-hole, you might need to:
 2. Wait longer for DHCP leases to expire
 3. Check if your router has any DNS override settings that need changing
 
-cmuppala4746: C:\Users\cmuppala>ipconfig  | findstr "DNS"
+User 1: C:\Users\cmuppala>ipconfig  | findstr "DNS"
    Connection-specific DNS Suffix  . :
    Connection-specific DNS Suffix  . :
    Connection-specific DNS Suffix  . :
@@ -891,7 +891,7 @@ Several possibilities:
 
 If you want to force the use of Pi-hole regardless of DHCP, you can manually set your DNS server to 192.168.68.120 in your network adapter settings.
 
-cmuppala4746: I tried release and reneew. Not refreshing. It is still showing the Ipv6 dns. 
+User 1: I tried release and reneew. Not refreshing. It is still showing the Ipv6 dns. 
 What if I disable ipv6 in the router. Is that recommended
 
 GitHub Copilot: # IPv6 DNS Issue with Pi-hole
@@ -943,7 +943,7 @@ netsh interface ipv4 set dnsservers "Wi-Fi" static 192.168.68.120 primary
 
 For most Pi-hole setups, **Option 1 (disabling IPv6)** is the simplest and most reliable solution to ensure all your DNS traffic goes through Pi-hole.
 
-cmuppala4746: netsh interface ipv6 set dnsservers "Wi-Fi" static 192.168.68.120 primary
+User 1: netsh interface ipv6 set dnsservers "Wi-Fi" static 192.168.68.120 primary
 The parameter is incorrect.      
 
 Only second one worked 
@@ -989,7 +989,7 @@ To verify if Pi-hole is blocking ads despite the IPv6 DNS servers:
 
 Even with both IPv4 and IPv6 DNS servers configured, Pi-hole should work for some traffic, but for maximum effectiveness, Options 1 or 2 are recommended.
 
-cmuppala4746: How do I bring back the changes. I have finished my testing
+User 1: How do I bring back the changes. I have finished my testing
 
 GitHub Copilot: # Reverting Pi-hole Testing Configuration
 
@@ -1032,7 +1032,7 @@ You should now see your ISP's DNS servers again, not the Pi-hole IP.
 
 If you want to keep Pi-hole active while returning your Windows machine to normal, you can configure Pi-hole as your router's DNS server instead of setting it individually on each device.
 
-cmuppala4746: netsh interface ipv6 set dnsservers "Wi-Fi" static :: none
+User 1: netsh interface ipv6 set dnsservers "Wi-Fi" static :: none
 
 How do i enable this
 
@@ -1060,7 +1060,7 @@ You should no longer see the IPv6 DNS servers in the output. If successful, your
 
 If you want to make this change persistent across reboots, you'll need to create a startup script or make the change through the Windows network adapter properties GUI.
 
-cmuppala4746: No no. I am asking since we disabled ipv6 in windows . how do i enable it back 
+User 1: No no. I am asking since we disabled ipv6 in windows . how do i enable it back 
 
 GitHub Copilot: # Re-enabling IPv6 DNS in Windows
 
@@ -1080,7 +1080,7 @@ ipconfig /all | findstr "DNS"
 
 You should see your IPv6 DNS servers listed again in the output (likely the ACT Fibernet DNS servers you had before).
 
-cmuppala4746: ideally if i change my hdcp settings and restart the router. Everything should change back right 
+User 1: ideally if i change my hdcp settings and restart the router. Everything should change back right 
 
 GitHub Copilot: # Restoring Network Settings After Pi-hole Testing
 
@@ -1117,7 +1117,7 @@ For other devices, you can force them to get new network settings by:
 
 This ensures all devices pick up the router's restored DNS configuration more quickly.
 
-cmuppala4746: Can you export this chat as a read me file 
+User 1: Can you export this chat as a read me file 
 
 GitHub Copilot: # Pi-hole Setup on Raspberry Pi
 
@@ -1233,7 +1233,7 @@ Pi-hole is a network-wide ad blocker that acts as a DNS sinkhole to block unwant
 
 For more information on Pi-hole configuration and features, visit: https://docs.pi-hole.net/
 
-cmuppala4746: Sorry. Give me the output in a .md file format so that I can install in wiki.. Make sure you have captured the chat history completely from begining and also avoid any redundancy as well 
+User 1: Sorry. Give me the output in a .md file format so that I can install in wiki.. Make sure you have captured the chat history completely from begining and also avoid any redundancy as well 
 
 GitHub Copilot: ```markdown
 # Pi-hole Installation and Configuration Guide for Raspberry Pi
